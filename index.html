@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuestPage — Digital Guest Guides for Algarve Properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1AA3DC;
+      --navy: #1C1C5C;
+      --bg: #FFFFFF;
+      --alt-bg: #F8F9FB;
+      --text: #2C3035;
+      --grey: #9BA3AB;
+      --border: #E8EAEC;
+      --wa: #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-wordmark {
+      text-decoration: none;
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 4px;
+    }
+
+    .nav-wordmark-text {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .nav-wordmark-text .wm-guest {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      color: var(--navy);
+    }
+
+    .nav-wordmark-text .wm-page {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .nav-wordmark-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--grey);
+      padding: 2px 4px;
+      transition: color 0.2s;
+    }
+
+    .lang-btn.active { color: var(--navy); }
+    .lang-divider { color: var(--border); font-size: 13px; }
+
+    .btn-nav {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-nav:hover { opacity: 0.88; }
+
+    @media (max-width: 480px) {
+      .btn-nav { padding: 8px 14px; font-size: 13px; }
+      .nav-wordmark-text { font-size: 18px; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 720px; width: 100%; }
+
+    .hero-headline {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      opacity: 0.85;
+      max-width: 560px;
+      margin: 20px auto 0;
+      line-height: 1.65;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      padding: 14px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-secondary:hover { opacity: 0.75; }
+
+    .hero-proof {
+      margin-top: 24px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 600px) {
+      #hero { min-height: auto; padding: 72px 20px; }
+      .hero-headline { font-size: 32px; }
+      .hero-sub { font-size: 16px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; text-align: center; }
+    }
+
+    /* ── SECTION SHARED ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    @media (max-width: 600px) {
+      .section-heading { font-size: 28px; }
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: var(--bg);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 48px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .step-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 15px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    .demo-box {
+      background: #EAF6FD;
+      border: 1.5px solid var(--blue);
+      border-radius: 12px;
+      padding: 28px;
+      max-width: 540px;
+      margin: 48px auto 0;
+      text-align: center;
+    }
+
+    .demo-box-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .demo-box-text {
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .btn-demo {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-demo:hover { opacity: 0.88; }
+
+    @media (max-width: 700px) {
+      .how-steps { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ── WHAT'S INCLUDED ── */
+    #included {
+      background: var(--alt-bg);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 40px;
+      max-width: 760px;
+      margin: 40px auto 0;
+      text-align: left;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--blue);
+    }
+
+    .included-sub {
+      font-size: 14px;
+      color: var(--grey);
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      #included { padding: 60px 20px; }
+      .checklist { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    @media (max-width: 700px) {
+      #how { padding: 60px 20px; }
+    }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    #pricing .section-label { color: var(--blue); }
+
+    #pricing .section-heading { color: #fff; }
+
+    .price-amount {
+      font-size: 80px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 24px;
+      line-height: 1;
+    }
+
+    .price-line {
+      font-size: 16px;
+      opacity: 0.75;
+      margin-top: 10px;
+    }
+
+    .trust-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .trust-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .btn-pricing {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 36px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-pricing:hover { opacity: 0.88; }
+
+    @media (max-width: 600px) {
+      #pricing { padding: 60px 20px; }
+      .price-amount { font-size: 64px; }
+      .trust-badges { flex-direction: column; align-items: center; }
+    }
+
+    /* ── GET IN TOUCH ── */
+    #contact {
+      background: var(--alt-bg);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .contact-heading {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .contact-sub {
+      font-size: 16px;
+      color: var(--grey);
+      margin-top: 16px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 36px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 32px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-wa:hover { opacity: 0.88; }
+
+    .wa-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+    .contact-reply {
+      font-size: 13px;
+      color: var(--grey);
+      margin-top: 16px;
+    }
+
+    @media (max-width: 600px) {
+      #contact { padding: 60px 20px; }
+      .contact-heading { font-size: 28px; }
+      .btn-wa { padding: 14px 24px; font-size: 15px; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .footer-center {
+      font-size: 13px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .footer-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      padding: 2px 4px;
+      transition: color 0.2s;
+    }
+
+    .footer-lang-btn.active { color: #fff; }
+    .footer-lang-divider { color: rgba(255,255,255,0.3); font-size: 13px; }
+
+    @media (max-width: 600px) {
+      footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .footer-right { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-wordmark">
+    <span class="nav-wordmark-text"><span class="wm-guest">guest</span><span class="wm-page">page</span></span>
+    <span class="nav-wordmark-sub">Algarve &middot; Portugal</span>
+  </a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
+    </div>
+    <a href="https://wa.me/351932755052" target="_blank" rel="noopener" class="btn-nav" data-i18n="nav_cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <h1 class="hero-headline" data-i18n="hero_headline">Give your guests everything they need, before they ask.</h1>
+    <p class="hero-sub" data-i18n="hero_sub">A professional digital guest guide for your property. Built and branded for you. Ready in 24 hours.</p>
+    <div class="hero-ctas">
+      <a href="https://algarve-property-guidebooks.vercel.app/clients/pdm10" target="_blank" rel="noopener" class="btn-primary" data-i18n="hero_cta1">See a live example</a>
+      <a href="https://wa.me/351932755052" target="_blank" rel="noopener" class="btn-secondary" data-i18n="hero_cta2">Get in touch</a>
+    </div>
+    <p class="hero-proof" data-i18n="hero_proof">Used by property managers across the Algarve.</p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <p class="section-label" data-i18n="how_label">HOW IT WORKS</p>
+  <h2 class="section-heading" data-i18n="how_heading">Three steps to your GuestPage</h2>
+  <div class="how-steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-title" data-i18n="step1_title">Send us your details</div>
+      <div class="step-desc" data-i18n="step1_desc">Property name, location, and your recommendations. We handle everything else.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-title" data-i18n="step2_title">We build your GuestPage</div>
+      <div class="step-desc" data-i18n="step2_desc">Branded to your property, tested on mobile, ready within 24 hours.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-title" data-i18n="step3_title">Share the link with guests</div>
+      <div class="step-desc" data-i18n="step3_desc">Send it via WhatsApp after check-in. Guests have everything they need instantly.</div>
+    </div>
+  </div>
+
+  <div class="demo-box">
+    <p class="demo-box-label" data-i18n="demo_label">See a real example</p>
+    <p class="demo-box-text" data-i18n="demo_text">This GuestPage was built for an apartment in Porto de Mós, Lagos.</p>
+    <a href="https://algarve-property-guidebooks.vercel.app/clients/pdm10" target="_blank" rel="noopener" class="btn-demo" data-i18n="demo_btn">Open live example</a>
+  </div>
+</section>
+
+<!-- ── WHAT'S INCLUDED ── -->
+<section id="included">
+  <p class="section-label" data-i18n="inc_label">WHAT'S INCLUDED</p>
+  <h2 class="section-heading" data-i18n="inc_heading">Everything your guests need. Nothing they don't.</h2>
+  <ul class="checklist" id="checklist"></ul>
+  <p class="included-sub" data-i18n="inc_sub">All content is managed by you via Google Sheets. No tech skills needed.</p>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <p class="section-label" data-i18n="price_label">PRICING</p>
+  <h2 class="section-heading" data-i18n="price_heading">One price. No surprises.</h2>
+  <div class="price-amount">€49</div>
+  <p class="price-line" data-i18n="price_line">Per property. One-time fee. No monthly costs.</p>
+  <div class="trust-badges">
+    <span class="trust-badge" data-i18n="badge1">No subscriptions</span>
+    <span class="trust-badge" data-i18n="badge2">No setup work for you</span>
+    <span class="trust-badge" data-i18n="badge3">Ready in 24 hours</span>
+  </div>
+  <a href="https://wa.me/351932755052" target="_blank" rel="noopener" class="btn-pricing" data-i18n="price_cta">Get in touch</a>
+</section>
+
+<!-- ── GET IN TOUCH ── -->
+<section id="contact">
+  <h2 class="contact-heading" data-i18n="contact_heading">Ready to get started?</h2>
+  <p class="contact-sub" data-i18n="contact_sub">Send us a WhatsApp with your property name and location. We will take it from there.</p>
+  <a href="https://wa.me/351932755052" target="_blank" rel="noopener" class="btn-wa">
+    <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span data-i18n="wa_btn">WhatsApp us</span>
+  </a>
+  <p class="contact-reply" data-i18n="contact_reply">We reply within a few hours.</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left" data-i18n="footer_brand">GuestPage by Algarve Property Guidebooks</div>
+  <div class="footer-center" data-i18n="footer_copy">© 2026 All rights reserved</div>
+  <div class="footer-right">
+    <button class="footer-lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="footer-lang-divider">|</span>
+    <button class="footer-lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
+  </div>
+</footer>
+
+<script>
+  const translations = {
+    en: {
+      nav_cta: 'Get in touch',
+      hero_headline: 'Give your guests everything they need, before they ask.',
+      hero_sub: 'A professional digital guest guide for your property. Built and branded for you. Ready in 24 hours.',
+      hero_cta1: 'See a live example',
+      hero_cta2: 'Get in touch',
+      hero_proof: 'Used by property managers across the Algarve.',
+      how_label: 'HOW IT WORKS',
+      how_heading: 'Three steps to your GuestPage',
+      step1_title: 'Send us your details',
+      step1_desc: 'Property name, location, and your recommendations. We handle everything else.',
+      step2_title: 'We build your GuestPage',
+      step2_desc: 'Branded to your property, tested on mobile, ready within 24 hours.',
+      step3_title: 'Share the link with guests',
+      step3_desc: 'Send it via WhatsApp after check-in. Guests have everything they need instantly.',
+      demo_label: 'SEE A REAL EXAMPLE',
+      demo_text: 'This GuestPage was built for an apartment in Porto de Mós, Lagos.',
+      demo_btn: 'Open live example',
+      inc_label: "WHAT'S INCLUDED",
+      inc_heading: "Everything your guests need. Nothing they don't.",
+      inc_items: [
+        'Arrival instructions and access codes',
+        'WiFi details with tap to copy',
+        'Appliance guides for every item',
+        'Restaurant recommendations with Maps links',
+        'Nearest beaches with directions',
+        'Supermarkets and local essentials',
+        'House rules and checkout checklist',
+        'Emergency contacts with tap to call',
+        'WhatsApp button to reach you instantly',
+        'Editable by you anytime from your phone'
+      ],
+      inc_sub: 'All content is managed by you via Google Sheets. No tech skills needed.',
+      price_label: 'PRICING',
+      price_heading: 'One price. No surprises.',
+      price_line: 'Per property. One-time fee. No monthly costs.',
+      badge1: 'No subscriptions',
+      badge2: 'No setup work for you',
+      badge3: 'Ready in 24 hours',
+      price_cta: 'Get in touch',
+      contact_heading: 'Ready to get started?',
+      contact_sub: 'Send us a WhatsApp with your property name and location. We will take it from there.',
+      wa_btn: 'WhatsApp us',
+      contact_reply: 'We reply within a few hours.',
+      footer_brand: 'GuestPage by Algarve Property Guidebooks',
+      footer_copy: '© 2026 All rights reserved'
+    },
+    pt: {
+      nav_cta: 'Entrar em contacto',
+      hero_headline: 'Dê aos seus hóspedes tudo o que precisam, antes de pedirem.',
+      hero_sub: 'Um guia digital profissional para o seu alojamento. Criado e personalizado para si. Pronto em 24 horas.',
+      hero_cta1: 'Ver exemplo real',
+      hero_cta2: 'Entrar em contacto',
+      hero_proof: 'Utilizado por gestores de propriedades no Algarve.',
+      how_label: 'COMO FUNCIONA',
+      how_heading: 'Três passos para o seu GuestPage',
+      step1_title: 'Envie-nos os seus dados',
+      step1_desc: 'Nome da propriedade, localização e as suas recomendações. Nós tratamos do resto.',
+      step2_title: 'Criamos o seu GuestPage',
+      step2_desc: 'Personalizado para a sua propriedade, testado em telemóvel, pronto em 24 horas.',
+      step3_title: 'Partilhe o link com os hóspedes',
+      step3_desc: 'Envie pelo WhatsApp após o check-in. Os hóspedes têm tudo o que precisam de imediato.',
+      demo_label: 'VER UM EXEMPLO REAL',
+      demo_text: 'Este GuestPage foi criado para um apartamento em Porto de Mós, Lagos.',
+      demo_btn: 'Abrir exemplo real',
+      inc_label: 'O QUE ESTÁ INCLUÍDO',
+      inc_heading: 'Tudo o que os seus hóspedes precisam. Nada mais.',
+      inc_items: [
+        'Instruções de chegada e códigos de acesso',
+        'WiFi com opção de copiar',
+        'Guias de utilização dos eletrodomésticos',
+        'Recomendações de restaurantes com links para mapas',
+        'Praias mais próximas com indicações',
+        'Supermercados e essenciais locais',
+        'Regras da casa e checklist de check-out',
+        'Contactos de emergência com chamada direta',
+        'Botão WhatsApp para contactar de imediato',
+        'Editável por si a qualquer momento pelo telemóvel'
+      ],
+      inc_sub: 'Todo o conteúdo é gerido por si via Google Sheets. Sem necessidade de conhecimentos técnicos.',
+      price_label: 'PREÇO',
+      price_heading: 'Um preço. Sem surpresas.',
+      price_line: 'Por propriedade. Pagamento único. Sem custos mensais.',
+      badge1: 'Sem subscrições',
+      badge2: 'Sem trabalho de configuração',
+      badge3: 'Pronto em 24 horas',
+      price_cta: 'Entrar em contacto',
+      contact_heading: 'Pronto para começar?',
+      contact_sub: 'Envie-nos uma mensagem WhatsApp com o nome e localização da sua propriedade. Nós tratamos do resto.',
+      wa_btn: 'Enviar WhatsApp',
+      contact_reply: 'Respondemos em poucas horas.',
+      footer_brand: 'GuestPage by Algarve Property Guidebooks',
+      footer_copy: '© 2026 Todos os direitos reservados'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function buildChecklist(lang) {
+    const list = document.getElementById('checklist');
+    list.innerHTML = '';
+    const items = translations[lang].inc_items;
+    items.forEach(function(item) {
+      const li = document.createElement('li');
+      li.className = 'check-item';
+      li.innerHTML =
+        '<svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
+        '<span>' + item + '</span>';
+      list.appendChild(li);
+    });
+  }
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) {
+        el.textContent = t[key];
+      }
+    });
+
+    buildChecklist(lang);
+
+    document.querySelectorAll('.lang-btn[data-lang]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    document.querySelectorAll('.footer-lang-btn[data-lang]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    document.documentElement.lang = lang;
+  }
+
+  buildChecklist('en');
+</script>
+</body>
+</html>
