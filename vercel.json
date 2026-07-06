@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/casinha23",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/joao-demo",
+      "permanent": true
+    },
+    {
+      "source": "/clients/casinha23",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/joao-demo",
+      "permanent": true
+    }
+  ]
+}
