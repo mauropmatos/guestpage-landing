@@ -14,6 +14,14 @@
     {
       "source": "/clients/joao-demo/:path*",
       "destination": "https://algarve-property-guidebooks.vercel.app/clients/joao-demo/:path*"
+    },
+    {
+      "source": "/luzbeachhouse",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/luzbeachhouse"
+    },
+    {
+      "source": "/clients/luzbeachhouse/:path*",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/luzbeachhouse/:path*"
     }
   ]
 }
