@@ -22,6 +22,14 @@
     {
       "source": "/clients/luzbeachhouse/:path*",
       "destination": "https://algarve-property-guidebooks.vercel.app/clients/luzbeachhouse/:path*"
+    },
+    {
+      "source": "/omarafado",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/omarafado"
+    },
+    {
+      "source": "/clients/omarafado/:path*",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/omarafado/:path*"
     }
   ]
 }
