@@ -30,6 +30,14 @@
     {
       "source": "/clients/omarafado/:path*",
       "destination": "https://algarve-property-guidebooks.vercel.app/clients/omarafado/:path*"
+    },
+    {
+      "source": "/cantinhodapraia",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/cantinhodapraia"
+    },
+    {
+      "source": "/clients/cantinhodapraia/:path*",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/cantinhodapraia/:path*"
     }
   ]
 }
