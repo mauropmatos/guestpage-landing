@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuestPage — Digital Guest Guides for Algarve Properties</title>
+  <title>GuestPage Algarve — Digital guest guides for holiday rentals</title>
+  <meta name="description" content="A branded digital guest guide for your Algarve holiday rental: getting here, check-in, Wi-Fi, the house, beaches, restaurants and checkout in one link. €49 per property, no subscription." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GuestPage Algarve — Digital guest guides for holiday rentals" />
+  <meta property="og:description" content="Give your guests everything they need, before they ask. One branded link per property. €49 once, no subscription." />
+  <meta property="og:image" content="https://www.guestpagealgarve.com/assets/images/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://www.guestpagealgarve.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -136,12 +145,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 80px 24px;
+      min-height: auto;
+      padding: 80px 24px 0;
       text-align: center;
     }
 
-    .hero-inner { max-width: 720px; width: 100%; }
+    .hero-inner { max-width: 1040px; width: 100%; display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; justify-items: center; }
+    .hero-copy { max-width: 720px; }
+    /* The phone is cropped at the bottom on purpose: the screen runs off the edge of the hero. */
+    .hero-visual { width: min(300px, 78vw); line-height: 0; filter: drop-shadow(0 24px 40px rgba(0,0,0,0.35)); }
+    .hero-visual img { width: 100%; height: auto; display: block; }
 
     .hero-headline {
       font-size: 48px;
@@ -205,9 +218,17 @@
       font-size: 13px;
       opacity: 0.6;
     }
+    /* Desktop: copy left, phone right. Sits after the hero rules so it wins the cascade. */
+    @media (min-width: 900px) {
+      #hero { padding-bottom: 0; }
+      .hero-inner { grid-template-columns: 1.15fr 0.85fr; gap: 56px; text-align: left; }
+      .hero-headline, .hero-sub { margin-left: 0; }
+      .hero-ctas { justify-content: flex-start; }
+      .hero-visual { width: 360px; justify-self: end; margin-top: 40px; }
+    }
 
     @media (max-width: 600px) {
-      #hero { min-height: auto; padding: 72px 20px; }
+      #hero { min-height: auto; padding: 64px 20px 0; }
       .hero-headline { font-size: 32px; }
       .hero-sub { font-size: 16px; }
       .hero-ctas { flex-direction: column; align-items: center; }
@@ -393,6 +414,7 @@
       opacity: 0.75;
       margin-top: 10px;
     }
+    .price-terms { font-size: 14px; opacity: 0.7; max-width: 520px; margin: 14px auto 0; line-height: 1.6; }
 
     .trust-badges {
       display: flex;
@@ -505,6 +527,8 @@
       font-size: 13px;
       color: #fff;
     }
+    .footer-mail { display: block; margin-top: 4px; font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer-mail:hover { color: #fff; }
 
     .footer-center {
       font-size: 13px;
@@ -564,6 +588,7 @@
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-inner">
+    <div class="hero-copy">
     <h1 class="hero-headline" data-i18n="hero_headline">Give your guests everything they need, before they ask.</h1>
     <p class="hero-sub" data-i18n="hero_sub">A digital companion for your guests. Built and branded for you. Ready in a few days.</p>
     <p class="hero-benefit" data-i18n="hero_benefit">Better guest experiences, better reviews, more bookings.</p>
@@ -572,6 +597,10 @@
       <a href="https://wa.me/351939005194" target="_blank" rel="noopener" class="btn-secondary" data-i18n="hero_cta2">Get in touch</a>
     </div>
     <p class="hero-proof" data-i18n="hero_proof">Used by property managers across the Algarve.</p>
+    </div>
+    <div class="hero-visual">
+      <img src="/assets/images/demo-guide.webp" width="412" height="575" alt="A GuestPage on a phone: Casa de Lagos, search bar, check-in times, Wi-Fi with tap to copy, Getting here" fetchpriority="high" />
+    </div>
   </div>
 </section>
 
@@ -618,6 +647,7 @@
   <h2 class="section-heading" data-i18n="price_heading">One price. No surprises.</h2>
   <div class="price-amount">€49</div>
   <p class="price-line" data-i18n="price_line">Introductory launch price. Per property. One-time fee. No monthly costs.</p>
+  <p class="price-terms" data-i18n="price_terms">Text changes are free for as long as the page is live. Layout changes: unlimited in the first 30 days, then one a month. Subscription guidebook tools charge from around €100 per property per year.</p>
   <div class="trust-badges">
     <span class="trust-badge" data-i18n="badge1">No subscriptions</span>
     <span class="trust-badge" data-i18n="badge2">No setup work for you</span>
@@ -641,7 +671,7 @@
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-left" data-i18n="footer_brand">GuestPage by Algarve Property Guidebooks</div>
+  <div class="footer-left"><span data-i18n="footer_brand">GuestPage Algarve</span><a class="footer-mail" href="mailto:contact@guestpagealgarve.com">contact@guestpagealgarve.com</a></div>
   <div class="footer-center" data-i18n="footer_copy">© 2026 All rights reserved</div>
   <div class="footer-right">
     <button class="footer-lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
@@ -662,28 +692,27 @@
       hero_proof: 'Used by property managers across the Algarve.',
       how_label: 'HOW IT WORKS',
       how_heading: 'Three steps to your GuestPage',
-      step1_title: 'Send us your details',
-      step1_desc: 'Property name, location, and your recommendations. We handle everything else.',
+      step1_title: 'Send us your listing link',
+      step1_desc: 'Your Airbnb or Booking link is enough to start. We pre-fill the page and only ask for what is missing.',
       step2_title: 'We build your GuestPage',
       step2_desc: 'Branded to your property, tested on mobile, ready within a few days.',
-      step3_title: 'Share the link with guests',
-      step3_desc: 'Send it via WhatsApp after check-in. Guests have everything they need instantly.',
+      step3_title: 'Share the link before arrival',
+      step3_desc: 'Send it by WhatsApp once the booking is confirmed. Guests get the way from the airport, the check-in steps and the Wi-Fi before they land.',
       demo_label: 'SEE A DEMO PAGE',
       demo_text: 'Casa de Lagos is a demo home. Open it on your phone to see how a GuestPage feels.',
       demo_btn: 'Open demo page',
       inc_label: "WHAT'S INCLUDED",
       inc_heading: "Everything your guests need. Nothing they don't.",
       inc_items: [
-        'Arrival instructions and access codes',
-        'WiFi details with tap to copy',
-        'Appliance guides for every item',
-        'Restaurant recommendations with Maps links',
-        'Nearest beaches with directions',
-        'Supermarkets and local essentials',
-        'House rules and checkout checklist',
-        'Emergency contacts with tap to call',
-        'WhatsApp button to reach you instantly',
-        'Editable by you anytime from your phone'
+        'Getting here from Faro or Lisbon: transfers, car hire, train and bus',
+        'Check-in steps, keys and parking, and the Wi-Fi password with tap to copy',
+        'A search bar that understands English, Portuguese, French, German and Spanish',
+        '65 ready answers about the Algarve, from sun cream and the linen to cockroaches and golf',
+        'Restaurants, beaches and things to do, with Maps links',
+        'House rules, appliances and a checkout checklist',
+        'Emergency numbers with tap to call, and a WhatsApp button to reach you',
+        'Guests can flag a mistake or leave a note with one tap, straight to you',
+        'You edit the text yourself, any time, from a Google Sheet on your phone'
       ],
       inc_sub: 'All content is managed by you via Google Sheets. No tech skills needed.',
       price_label: 'PRICING',
@@ -697,7 +726,8 @@
       contact_sub: 'Send us a WhatsApp with your property name and location. We will take it from there.',
       wa_btn: 'WhatsApp us',
       contact_reply: 'We reply within a few hours.',
-      footer_brand: 'GuestPage by Algarve Property Guidebooks',
+      price_terms: 'Text changes are free for as long as the page is live. Layout changes: unlimited in the first 30 days, then one a month. Subscription guidebook tools charge from around €100 per property per year.',
+      footer_brand: 'GuestPage Algarve',
       footer_copy: '© 2026 All rights reserved'
     },
     pt: {
@@ -710,28 +740,27 @@
       hero_proof: 'Utilizado por gestores de propriedades no Algarve.',
       how_label: 'COMO FUNCIONA',
       how_heading: 'Três passos para o seu GuestPage',
-      step1_title: 'Envie-nos os seus dados',
-      step1_desc: 'Nome da propriedade, localização e as suas recomendações. Nós tratamos do resto.',
+      step1_title: 'Envie-nos o link do anúncio',
+      step1_desc: 'O link do Airbnb ou do Booking chega para começar. Nós pré-preenchemos a página e só pedimos o que falta.',
       step2_title: 'Criamos o seu GuestPage',
       step2_desc: 'Personalizado para a sua propriedade, testado em telemóvel, pronto em poucos dias.',
-      step3_title: 'Partilhe o link com os hóspedes',
-      step3_desc: 'Envie pelo WhatsApp após o check-in. Os hóspedes têm tudo o que precisam de imediato.',
+      step3_title: 'Partilhe o link antes da chegada',
+      step3_desc: 'Envie pelo WhatsApp assim que a reserva estiver confirmada. Os hóspedes recebem o caminho desde o aeroporto, os passos do check-in e o Wi-Fi antes de aterrar.',
       demo_label: 'VER PÁGINA DE DEMONSTRAÇÃO',
       demo_text: 'Casa de Lagos é uma casa de demonstração. Abra no telemóvel para ver como funciona um GuestPage.',
       demo_btn: 'Abrir página de demonstração',
       inc_label: 'O QUE ESTÁ INCLUÍDO',
       inc_heading: 'Tudo o que os seus hóspedes precisam. Nada mais.',
       inc_items: [
-        'Instruções de chegada e códigos de acesso',
-        'WiFi com opção de copiar',
-        'Guias de utilização dos eletrodomésticos',
-        'Recomendações de restaurantes com links para mapas',
-        'Praias mais próximas com indicações',
-        'Supermercados e essenciais locais',
-        'Regras da casa e checklist de check-out',
-        'Contactos de emergência com chamada direta',
-        'Botão WhatsApp para contactar de imediato',
-        'Editável por si a qualquer momento pelo telemóvel'
+        'Como chegar desde Faro ou Lisboa: transfers, aluguer de carro, comboio e autocarro',
+        'Passos do check-in, chaves e estacionamento, e a palavra-passe do Wi-Fi com um toque para copiar',
+        'Uma pesquisa que entende português, inglês, francês, alemão e espanhol',
+        '65 respostas prontas sobre o Algarve, do protetor solar e da roupa de cama às baratas e ao golfe',
+        'Restaurantes, praias e o que fazer, com links para o Maps',
+        'Regras da casa, eletrodomésticos e checklist de check-out',
+        'Números de emergência com chamada direta e botão de WhatsApp para falar consigo',
+        'Os hóspedes assinalam um erro ou deixam uma nota com um toque, diretamente para si',
+        'Edita o texto quando quiser, a partir de uma Google Sheet no telemóvel'
       ],
       inc_sub: 'Todo o conteúdo é gerido por si via Google Sheets. Sem necessidade de conhecimentos técnicos.',
       price_label: 'PREÇO',
@@ -745,7 +774,8 @@
       contact_sub: 'Envie-nos uma mensagem WhatsApp com o nome e localização da sua propriedade. Nós tratamos do resto.',
       wa_btn: 'Enviar WhatsApp',
       contact_reply: 'Respondemos em poucas horas.',
-      footer_brand: 'GuestPage by Algarve Property Guidebooks',
+      price_terms: 'Alterações de texto são gratuitas enquanto a página estiver ativa. Alterações de estrutura: sem limite nos primeiros 30 dias, depois uma por mês. As ferramentas por subscrição custam a partir de cerca de 100 € por propriedade por ano.',
+      footer_brand: 'GuestPage Algarve',
       footer_copy: '© 2026 Todos os direitos reservados'
     }
   };
@@ -766,8 +796,9 @@
     });
   }
 
-  function setLang(lang) {
+  function setLang(lang, remember) {
     currentLang = lang;
+    if (remember !== false) { try { localStorage.setItem('gp-lang', lang); } catch (e) {} }
     const t = translations[lang];
 
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
@@ -789,7 +820,13 @@
     document.documentElement.lang = lang;
   }
 
-  setLang('pt');
+  // First visit: follow the browser language. After a tap on EN or PT, keep that choice.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('gp-lang'); } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    setLang(saved === 'en' || saved === 'pt' ? saved : (nav.indexOf('pt') === 0 ? 'pt' : 'en'), false);
+  })();
 </script>
 </body>
 </html>
