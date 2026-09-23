@@ -38,6 +38,14 @@
     {
       "source": "/clients/cantinhodapraia/:path*",
       "destination": "https://algarve-property-guidebooks.vercel.app/clients/cantinhodapraia/:path*"
+    },
+    {
+      "source": "/casadelagos",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/casadelagos"
+    },
+    {
+      "source": "/clients/casadelagos/:path*",
+      "destination": "https://algarve-property-guidebooks.vercel.app/clients/casadelagos/:path*"
     }
   ]
 }
