@@ -3,821 +3,400 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuestPage Algarve — Digital guest guides for holiday rentals</title>
-  <meta name="description" content="A branded digital guest guide for your Algarve holiday rental: getting here, check-in, Wi-Fi, the house, beaches, restaurants and checkout in one link. €49 per property, no subscription." />
+  <title>GuestPage Algarve · Guest guides for Algarve holiday homes</title>
+  <meta name="description" content="A guest guide for your Algarve holiday home: getting here, the keys, the Wi-Fi, the house, the beaches and checkout, in one link. Built for you in Lagos. €49 once, IVA included." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="GuestPage Algarve — Digital guest guides for holiday rentals" />
-  <meta property="og:description" content="Give your guests everything they need, before they ask. One branded link per property. €49 once, no subscription." />
+  <meta property="og:title" content="GuestPage Algarve · Guest guides for Algarve holiday homes" />
+  <meta property="og:description" content="One link with everything your guests ask you on WhatsApp. €49 once per property, IVA included." />
   <meta property="og:image" content="https://www.guestpagealgarve.com/assets/images/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://www.guestpagealgarve.com/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#1C1C5C" />
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Archivo by Omnibus-Type, SIL Open Font License 1.1 (assets/fonts/OFL.txt). Served from this site, not from Google. */
+    @font-face {
+      font-family: 'Archivo';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 100 900;
+      font-stretch: 62% 125%;
+      src: url('/assets/fonts/archivo-latin.woff2') format('woff2-variations'), url('/assets/fonts/archivo-latin.woff2') format('woff2');
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
 
     :root {
-      --blue: #1AA3DC;
       --navy: #1C1C5C;
-      --bg: #FFFFFF;
-      --alt-bg: #F8F9FB;
-      --text: #2C3035;
-      --grey: #9BA3AB;
-      --border: #E8EAEC;
-      --wa: #25D366;
+      --blue: #1AA3DC;
+      --blue-text: #0B6FA4;
+      --ochre: #E2A33A;
+      --lime: #FBFAF6;
+      --line: #E6E3DA;
+      --text: #3E4160;
+      --muted: #5A5D78;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-wordmark {
-      text-decoration: none;
-      display: inline-flex;
-      flex-direction: column;
-      line-height: 1;
-      gap: 4px;
-    }
-
-    .nav-wordmark-text {
-      font-size: 22px;
-      line-height: 1;
-    }
-
-    .nav-wordmark-text .wm-guest {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-weight: 400;
+      margin: 0;
+      background: var(--lime);
       color: var(--navy);
-    }
-
-    .nav-wordmark-text .wm-page {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-weight: 700;
-      color: var(--blue);
-    }
-
-    .nav-wordmark-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 4px;
-      color: var(--grey);
-      text-transform: uppercase;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--grey);
-      padding: 2px 4px;
-      transition: color 0.2s;
-    }
-
-    .lang-btn.active { color: var(--navy); }
-    .lang-divider { color: var(--border); font-size: 13px; }
-
-    .btn-nav {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: opacity 0.2s;
-    }
-
-    .btn-nav:hover { opacity: 0.88; }
-
-    @media (max-width: 480px) {
-      .btn-nav { padding: 8px 14px; font-size: 13px; }
-      .nav-wordmark-text { font-size: 18px; }
-    }
-
-    /* ── HERO ── */
-    #hero {
-      background: var(--navy);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: auto;
-      padding: 80px 24px 0;
-      text-align: center;
-    }
-
-    .hero-inner { max-width: 1040px; width: 100%; display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; justify-items: center; }
-    .hero-copy { max-width: 720px; }
-    /* The phone is cropped at the bottom on purpose: the screen runs off the edge of the hero. */
-    .hero-visual { width: min(300px, 78vw); line-height: 0; filter: drop-shadow(0 24px 40px rgba(0,0,0,0.35)); }
-    .hero-visual img { width: 100%; height: auto; display: block; }
-
-    .hero-headline {
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 1.15;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      font-weight: 400;
-      opacity: 0.85;
-      max-width: 560px;
-      margin: 20px auto 0;
-      line-height: 1.65;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 36px;
-    }
-
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 28px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .btn-primary:hover { opacity: 0.88; }
-
-    .btn-secondary {
-      background: transparent;
-      color: #fff;
-      border: 2px solid #fff;
-      border-radius: 8px;
-      padding: 14px 28px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .btn-secondary:hover { opacity: 0.75; }
-
-    .hero-proof {
-      margin-top: 24px;
-      font-size: 13px;
-      opacity: 0.6;
-    }
-    /* Desktop: copy left, phone right. Sits after the hero rules so it wins the cascade. */
-    @media (min-width: 900px) {
-      #hero { padding-bottom: 0; }
-      .hero-inner { grid-template-columns: 1.15fr 0.85fr; gap: 56px; text-align: left; }
-      .hero-headline, .hero-sub { margin-left: 0; }
-      .hero-ctas { justify-content: flex-start; }
-      .hero-visual { width: 360px; justify-self: end; margin-top: 40px; }
-    }
-
-    @media (max-width: 600px) {
-      #hero { min-height: auto; padding: 64px 20px 0; }
-      .hero-headline { font-size: 32px; }
-      .hero-sub { font-size: 16px; }
-      .hero-ctas { flex-direction: column; align-items: center; }
-      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; text-align: center; }
-    }
-
-    /* ── SECTION SHARED ── */
-    .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--blue);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .section-heading {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-
-    @media (max-width: 600px) {
-      .section-heading { font-size: 28px; }
-    }
-
-    /* ── HOW IT WORKS ── */
-    #how {
-      background: var(--bg);
-      padding: 80px 24px;
-      text-align: center;
-    }
-
-    .how-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 48px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .step-number {
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .step-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .step-desc {
-      font-size: 15px;
-      color: var(--grey);
-      line-height: 1.6;
-    }
-
-    .demo-box {
-      background: #EAF6FD;
-      border: 1.5px solid var(--blue);
-      border-radius: 12px;
-      padding: 28px;
-      max-width: 540px;
-      margin: 48px auto 0;
-      text-align: center;
-    }
-
-    .demo-box-label {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--blue);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .demo-box-text {
-      font-size: 15px;
-      color: var(--text);
-    }
-
-    .btn-demo {
-      display: inline-block;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 16px;
-      transition: opacity 0.2s;
-    }
-
-    .btn-demo:hover { opacity: 0.88; }
-
-    @media (max-width: 700px) {
-      .how-steps { grid-template-columns: 1fr; gap: 32px; }
-    }
-
-    /* ── WHAT'S INCLUDED ── */
-    #included {
-      background: var(--alt-bg);
-      padding: 80px 24px;
-      text-align: center;
-    }
-
-    .checklist {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0 40px;
-      max-width: 760px;
-      margin: 40px auto 0;
-      text-align: left;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      color: var(--text);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .check-icon {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      color: var(--blue);
-    }
-
-    .included-sub {
-      font-size: 14px;
-      color: var(--grey);
-      margin-top: 32px;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      #included { padding: 60px 20px; }
-      .checklist { grid-template-columns: 1fr; gap: 0; }
-    }
-
-    @media (max-width: 700px) {
-      #how { padding: 60px 20px; }
-    }
-
-    /* ── PRICING ── */
-    #pricing {
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-      padding: 80px 24px;
-    }
-
-    #pricing .section-label { color: var(--blue); }
-
-    #pricing .section-heading { color: #fff; }
-
-    .price-amount {
-      font-size: 80px;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 24px;
-      line-height: 1;
-    }
-
-    .price-line {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
       font-size: 16px;
-      opacity: 0.75;
-      margin-top: 10px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
-    .price-terms { font-size: 14px; opacity: 0.7; max-width: 520px; margin: 14px auto 0; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--navy); }
+    a:hover { color: var(--blue-text); }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-    .trust-badges {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 32px;
+    .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    .wide { font-stretch: 112%; }
+
+    /* Header */
+    .site-header { border-bottom: 1px solid var(--line); background: var(--lime); }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+    .wordmark { text-decoration: none; display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+    .wordmark-text { font-family: Georgia, 'Times New Roman', serif; font-size: 24px; line-height: 1; }
+    .wordmark-text .g { color: var(--navy); }
+    .wordmark-text .p { color: var(--blue); font-weight: 700; }
+    .wordmark-sub { font-size: 10px; letter-spacing: 4px; color: #6B6E86; font-weight: 500; padding-left: 4px; }
+    .site-nav { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500; }
+    .site-nav a { text-decoration: none; }
+    .lang { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+    .lang button { background: none; border: 0; padding: 8px 2px; font: inherit; font-weight: 500; color: #6B6E86; cursor: pointer; min-height: 44px; }
+    .lang button.active { color: var(--navy); font-weight: 700; }
+    .lang span { color: #B7B4AA; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--navy); color: #FFFFFF; text-decoration: none;
+      padding: 12px 18px; border-radius: 6px; font-weight: 600; min-height: 44px;
     }
-
-    .trust-badge {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .btn-pricing {
-      display: inline-block;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 32px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 36px;
-      transition: opacity 0.2s;
-    }
-
-    .btn-pricing:hover { opacity: 0.88; }
-
-    @media (max-width: 600px) {
-      #pricing { padding: 60px 20px; }
-      .price-amount { font-size: 64px; }
-      .trust-badges { flex-direction: column; align-items: center; }
+    .btn:hover { color: #FFFFFF; background: #2A2A78; }
+    .btn-lg { padding: 16px 24px; font-size: 17px; min-height: 52px; }
+    @media (max-width: 640px) {
+      .site-nav .nav-link { display: none; }
+      .site-nav { gap: 14px; }
+      .wordmark-text { font-size: 21px; }
     }
 
-    /* ── GET IN TOUCH ── */
-    #contact {
-      background: var(--alt-bg);
-      text-align: center;
-      padding: 80px 24px;
+    /* Platibanda band */
+    .band { height: 14px; background: repeating-linear-gradient(90deg, var(--ochre) 0 22px, transparent 22px 34px); border-bottom: 5px solid var(--ochre); }
+    .band-navy { height: 10px; background: repeating-linear-gradient(90deg, var(--navy) 0 22px, transparent 22px 34px); }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 56px; align-items: center; padding-top: 72px; padding-bottom: 88px; }
+    .hero-copy { display: flex; flex-direction: column; gap: 22px; }
+    .kicker { margin: 0; font-size: 15px; font-weight: 600; color: var(--blue-text); }
+    h1 { margin: 0; font-size: clamp(40px, 5vw, 60px); line-height: 1.02; font-weight: 800; letter-spacing: -0.5px; text-wrap: balance; }
+    .lead { margin: 0; font-size: 20px; line-height: 1.55; color: var(--text); max-width: 34em; text-wrap: pretty; }
+    .actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+    .text-link { font-size: 17px; font-weight: 600; text-underline-offset: 4px; }
+    .facts { margin: 4px 0 0; font-size: 15px; color: var(--muted); }
+    .window { display: flex; justify-content: center; }
+    .window figure {
+      margin: 0; background: var(--blue); padding: 26px 26px 0; border-radius: 3px;
+      box-shadow: 0 0 0 10px #FFFFFF, 0 0 0 11px var(--line);
+    }
+    .window img {
+      width: min(292px, calc(100vw - 110px)); aspect-ratio: 292 / 560; height: auto; object-fit: cover; object-position: top;
+      border: 9px solid #15152E; border-bottom: 0; border-radius: 34px 34px 0 0; background: #FFFFFF;
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 44px; padding-bottom: 64px; gap: 44px; }
+      .lead { font-size: 18px; }
     }
 
-    .contact-heading {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .contact-sub {
-      font-size: 16px;
-      color: var(--grey);
-      margin-top: 16px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .btn-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--wa);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 16px 36px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 32px;
-      transition: opacity 0.2s;
-    }
-
-    .btn-wa:hover { opacity: 0.88; }
-
-    .wa-icon { width: 22px; height: 22px; flex-shrink: 0; }
-
-    .contact-reply {
-      font-size: 13px;
-      color: var(--grey);
-      margin-top: 16px;
-    }
-
-    @media (max-width: 600px) {
-      #contact { padding: 60px 20px; }
-      .contact-heading { font-size: 28px; }
-      .btn-wa { padding: 14px 24px; font-size: 15px; }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy);
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .footer-left {
-      font-size: 13px;
-      color: #fff;
-    }
-    .footer-mail { display: block; margin-top: 4px; font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none; }
-    .footer-mail:hover { color: #fff; }
-
-    .footer-center {
-      font-size: 13px;
-      color: #fff;
-      text-align: center;
-    }
-
-    .footer-right {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .footer-lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.5);
-      padding: 2px 4px;
-      transition: color 0.2s;
-    }
-
-    .footer-lang-btn.active { color: #fff; }
-    .footer-lang-divider { color: rgba(255,255,255,0.3); font-size: 13px; }
-
-    @media (max-width: 600px) {
-      footer {
-        grid-template-columns: 1fr;
-        text-align: center;
+    /* Screens */
+    .screens { background: #FFFFFF; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .screens .wrap { padding-top: 88px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 44px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+    h2 { margin: 0; font-weight: 800; line-height: 1.08; }
+    .section-head h2 { font-size: clamp(30px, 3.8vw, 46px); max-width: 15em; text-wrap: balance; }
+    .section-head p { margin: 0; font-size: 16px; color: var(--muted); max-width: 26em; }
+    .screen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 28px; align-items: start; }
+    .screen { display: flex; flex-direction: column; gap: 14px; }
+    .screen img { width: 100%; aspect-ratio: 390 / 560; height: auto; object-fit: cover; object-position: top; border-radius: 18px; border: 1px solid var(--line); }
+    .screen h3 { margin: 4px 0 0; font-size: 19px; font-weight: 700; }
+    .screen p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--text); }
+    @media (min-width: 1000px) { .screen:nth-child(even) { margin-top: 48px; } }
+    /* Phones: the four screens become a row to swipe through */
+    @media (max-width: 640px) {
+      .screen-grid {
+        display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+        margin: 0 -24px; padding: 0 24px 8px; scroll-padding-left: 24px;
+        -webkit-overflow-scrolling: touch;
       }
-      .footer-right { justify-content: center; }
+      .screen { flex: 0 0 76%; scroll-snap-align: start; }
+      .screens .wrap { padding-top: 64px; padding-bottom: 72px; gap: 32px; }
     }
+
+    /* Made here */
+    .made { padding-top: 88px; padding-bottom: 88px; }
+    .made-inner { display: flex; gap: 24px; align-items: flex-start; max-width: 760px; }
+    .made-inner img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 4px solid #FFFFFF; box-shadow: 0 0 0 1px var(--line); }
+    .made-text { display: flex; flex-direction: column; gap: 14px; }
+    .made-text h2 { font-size: 34px; line-height: 1.1; }
+    .made-text p { margin: 0; font-size: 18px; line-height: 1.6; color: var(--text); text-wrap: pretty; }
+    .made-text .contact { font-size: 15px; color: var(--muted); }
+    .made-text .contact a { color: var(--muted); }
+    @media (max-width: 520px) { .made-inner { flex-direction: column; } }
+
+    /* Price */
+    .price { background: #FFFFFF; border-top: 1px solid var(--line); }
+    .price .wrap { padding-top: 88px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 48px; align-items: center; }
+    .sign { background: var(--ochre); padding: 40px 40px 34px; border-radius: 3px; display: flex; flex-direction: column; gap: 6px; box-shadow: inset 0 0 0 6px var(--lime), inset 0 0 0 8px var(--navy); }
+    .sign p { margin: 0; }
+    .sign .label { font-size: 16px; font-weight: 700; }
+    .sign .amount { font-size: clamp(88px, 11vw, 120px); line-height: 0.95; font-weight: 900; font-stretch: 118%; letter-spacing: -2px; }
+    .sign .tax { font-size: 16px; font-weight: 600; }
+    .terms { display: flex; flex-direction: column; gap: 18px; }
+    .terms h2 { font-size: 34px; line-height: 1.1; }
+    .terms dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 12px 24px; font-size: 17px; line-height: 1.45; }
+    .terms dt { font-weight: 700; }
+    .terms dd { margin: 0; color: var(--text); }
+    @media (max-width: 520px) {
+      .terms dl { grid-template-columns: 1fr; gap: 2px; }
+      .terms dd { margin-bottom: 10px; }
+      .sign { padding: 32px 28px 28px; }
+    }
+
+    /* Footer */
+    .site-footer { background: var(--navy); color: #E9E9F2; }
+    .site-footer .wrap { padding-top: 36px; padding-bottom: 44px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 14px; line-height: 1.7; }
+    .site-footer a { color: #E9E9F2; }
+    .site-footer a:hover { color: #FFFFFF; }
+    .foot-col { display: flex; flex-direction: column; gap: 2px; }
+    .foot-col strong { color: #FFFFFF; }
+    .site-footer .lang button { color: rgba(233, 233, 242, 0.7); }
+    .site-footer .lang button.active { color: #FFFFFF; }
+    .site-footer .lang span { color: rgba(233, 233, 242, 0.4); }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <a href="#" class="nav-wordmark">
-    <span class="nav-wordmark-text"><span class="wm-guest">guest</span><span class="wm-page">page</span></span>
-    <span class="nav-wordmark-sub">Algarve &middot; Portugal</span>
-  </a>
-  <div class="nav-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-      <span class="lang-divider">|</span>
-      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
-    </div>
-    <a href="https://wa.me/351939005194" target="_blank" rel="noopener" class="btn-nav" data-i18n="nav_cta">Get in touch</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="wordmark" aria-label="GuestPage Algarve, home">
+      <span class="wordmark-text"><span class="g">guest</span><span class="p">page</span></span>
+      <span class="wordmark-sub">ALGARVE</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a class="nav-link" href="/casadelagos" target="_blank" rel="noopener" data-i18n="nav_demo">Demo house</a>
+      <a class="nav-link" href="#price" data-i18n="nav_price">Price</a>
+      <div class="lang">
+        <button type="button" data-lang="en" onclick="setLang('en')">EN</button><span>/</span><button type="button" data-lang="pt" onclick="setLang('pt')">PT</button>
+      </div>
+      <a class="btn" href="https://wa.me/351939005194" target="_blank" rel="noopener" data-i18n="nav_cta">WhatsApp me</a>
+    </nav>
   </div>
-</nav>
+</header>
 
-<!-- ── HERO ── -->
-<section id="hero">
-  <div class="hero-inner">
+<div class="band" aria-hidden="true"></div>
+
+<main>
+  <section class="wrap hero">
     <div class="hero-copy">
-    <h1 class="hero-headline" data-i18n="hero_headline">Give your guests everything they need, before they ask.</h1>
-    <p class="hero-sub" data-i18n="hero_sub">A digital companion for your guests. Built and branded for you. Ready in a few days.</p>
-    <p class="hero-benefit" data-i18n="hero_benefit">Better guest experiences, better reviews, more bookings.</p>
-    <div class="hero-ctas">
-      <a href="/casadelagos" target="_blank" rel="noopener" class="btn-primary" data-i18n="hero_cta1">See a demo page</a>
-      <a href="https://wa.me/351939005194" target="_blank" rel="noopener" class="btn-secondary" data-i18n="hero_cta2">Get in touch</a>
+      <p class="kicker">Bem-vindos · Lagos, Algarve</p>
+      <h1 class="wide" data-i18n="hero_h1">One link with everything your guests ask you on WhatsApp.</h1>
+      <p class="lead" data-i18n="hero_lead">The Wi-Fi, the keysafe, the bins, the beach. I build it from your Airbnb listing, and you change the text yourself from a Google Sheet on your phone.</p>
+      <div class="actions">
+        <a class="btn btn-lg" href="https://wa.me/351939005194" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z"></path></svg>
+          <span data-i18n="cta">Send me your Airbnb link</span>
+        </a>
+        <a class="text-link" href="/casadelagos" target="_blank" rel="noopener" data-i18n="demo_link">Open the demo house</a>
+      </div>
+      <p class="facts" data-i18n="hero_facts">€49 once per property, IVA included · Ready in a few days · No app for guests to download</p>
     </div>
-    <p class="hero-proof" data-i18n="hero_proof">Used by property managers across the Algarve.</p>
+    <div class="window">
+      <figure>
+        <img src="/assets/images/screen-home.webp" width="584" height="1120" alt="The Casa de Lagos demo guide on a phone: the house, a search bar, and the Wi-Fi name and password with a Copy button" data-i18n-alt="alt_home" fetchpriority="high" />
+      </figure>
     </div>
-    <div class="hero-visual">
-      <img src="/assets/images/demo-guide.webp" width="412" height="575" alt="A GuestPage on a phone: Casa de Lagos, search bar, check-in times, Wi-Fi with tap to copy, Getting here" fetchpriority="high" />
+  </section>
+
+  <section class="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="wide" data-i18n="screens_h2">What your guest sees, from the airport to the keysafe.</h2>
+        <p data-i18n="screens_p">Real screens from Casa de Lagos, the demo house. Your page has your house, your keys and your photos.</p>
+      </div>
+      <div class="screen-grid">
+        <div class="screen">
+          <img src="/assets/images/screen-arrive.webp" width="560" height="804" loading="lazy" alt="Arrive: the address, the distance from Faro Airport and from Lisbon" data-i18n-alt="alt_arrive" />
+          <h3 data-i18n="s1_h">Getting here</h3>
+          <p data-i18n="s1_p">From Faro Airport, 90 km on the A22. The last train to Lagos, the transfers, the car hire.</p>
+        </div>
+        <div class="screen">
+          <img src="/assets/images/screen-keys.webp" width="560" height="804" loading="lazy" alt="House: a card for each key, saying which door it opens and which way it turns" data-i18n-alt="alt_keys" />
+          <h3 data-i18n="s2_h">A card for every key</h3>
+          <p data-i18n="s2_p">Which door it opens, how to tell it apart, which way it turns. Nobody calls you from the doorstep.</p>
+        </div>
+        <div class="screen">
+          <img src="/assets/images/screen-fix.webp" width="560" height="804" loading="lazy" alt="Contacts: Something not working? Fixes for the Wi-Fi, the keysafe, being locked out, the safe and more" data-i18n-alt="alt_fix" />
+          <h3 data-i18n="s3_h">Something not working?</h3>
+          <p data-i18n="s3_p">What to try first. If that fails, a WhatsApp to you that already says the house, the problem and what they tried.</p>
+        </div>
+        <div class="screen">
+          <img src="/assets/images/screen-checkout.webp" width="560" height="804" loading="lazy" alt="Checkout: checkout at 11h00 and a checklist to tick off" data-i18n-alt="alt_checkout" />
+          <h3 data-i18n="s4_h">Checkout, ticked off</h3>
+          <p data-i18n="s4_p">Shutters, air conditioning, Netflix logged out, keys back in the keysafe.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── HOW IT WORKS ── -->
-<section id="how">
-  <p class="section-label" data-i18n="how_label">HOW IT WORKS</p>
-  <h2 class="section-heading" data-i18n="how_heading">Three steps to your GuestPage</h2>
-  <div class="how-steps">
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-title" data-i18n="step1_title">Send us your details</div>
-      <div class="step-desc" data-i18n="step1_desc">Property name, location, and your recommendations. We handle everything else.</div>
+  <section class="wrap made">
+    <div class="made-inner">
+      <img src="/assets/images/mauro.webp" width="192" height="192" alt="Mauro" />
+      <div class="made-text">
+        <h2 class="wide" data-i18n="made_h2">Made in Lagos, by me.</h2>
+        <p data-i18n="made_p">I'm Mauro. I look after holiday homes here, so I know the questions guests send at eleven at night. I build every GuestPage myself and test it on my phone before you get the link.</p>
+        <p class="contact"><a href="https://wa.me/351939005194" target="_blank" rel="noopener">WhatsApp +351 939 005 194</a> · <a href="mailto:contact@guestpagealgarve.com">contact@guestpagealgarve.com</a></p>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-title" data-i18n="step2_title">We build your GuestPage</div>
-      <div class="step-desc" data-i18n="step2_desc">Branded to your property, tested on mobile, ready within a few days.</div>
+  </section>
+
+  <section class="price" id="price">
+    <div class="wrap">
+      <div class="sign">
+        <p class="label" data-i18n="price_label">Introductory price, per property, once</p>
+        <p class="amount wide" data-i18n="price_amount">€49</p>
+        <p class="tax" data-i18n="price_tax">IVA included</p>
+      </div>
+      <div class="terms">
+        <h2 class="wide" data-i18n="terms_h2">No subscription. Edit it for as long as it's live.</h2>
+        <dl>
+          <dt data-i18n="t1_dt">Text changes</dt><dd data-i18n="t1_dd">Free, any time, from the Google Sheet.</dd>
+          <dt data-i18n="t2_dt">Layout changes</dt><dd data-i18n="t2_dd">Unlimited for 30 days, then one a month.</dd>
+          <dt data-i18n="t3_dt">Guidebook apps</dt><dd data-i18n="t3_dd">Charge from around €100 per property, every year.</dd>
+        </dl>
+        <div class="actions">
+          <a class="btn btn-lg" href="https://wa.me/351939005194" target="_blank" rel="noopener" data-i18n="cta">Send me your Airbnb link</a>
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-title" data-i18n="step3_title">Share the link with guests</div>
-      <div class="step-desc" data-i18n="step3_desc">Send it via WhatsApp after check-in. Guests have everything they need instantly.</div>
+  </section>
+</main>
+
+<div class="band-navy" aria-hidden="true"></div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-col">
+      <strong>GuestPage Algarve</strong>
+      <span>Lagos, Portugal</span>
+      <a href="mailto:contact@guestpagealgarve.com">contact@guestpagealgarve.com</a>
     </div>
-  </div>
-
-  <div class="demo-box">
-    <p class="demo-box-label" data-i18n="demo_label">See a demo page</p>
-    <p class="demo-box-text" data-i18n="demo_text">Casa de Lagos is a demo home. Open it on your phone to see how a GuestPage feels.</p>
-    <a href="/casadelagos" target="_blank" rel="noopener" class="btn-demo" data-i18n="demo_btn">Open demo page</a>
-  </div>
-</section>
-
-<!-- ── WHAT'S INCLUDED ── -->
-<section id="included">
-  <p class="section-label" data-i18n="inc_label">WHAT'S INCLUDED</p>
-  <h2 class="section-heading" data-i18n="inc_heading">Everything your guests need. Nothing they don't.</h2>
-  <ul class="checklist" id="checklist"></ul>
-  <p class="included-sub" data-i18n="inc_sub">All content is managed by you via Google Sheets. No tech skills needed.</p>
-</section>
-
-<!-- ── PRICING ── -->
-<section id="pricing">
-  <p class="section-label" data-i18n="price_label">PRICING</p>
-  <h2 class="section-heading" data-i18n="price_heading">One price. No surprises.</h2>
-  <div class="price-amount">€49</div>
-  <p class="price-line" data-i18n="price_line">Introductory launch price. Per property. One-time fee. No monthly costs.</p>
-  <p class="price-terms" data-i18n="price_terms">Text changes are free for as long as the page is live. Layout changes: unlimited in the first 30 days, then one a month. Subscription guidebook tools charge from around €100 per property per year.</p>
-  <div class="trust-badges">
-    <span class="trust-badge" data-i18n="badge1">No subscriptions</span>
-    <span class="trust-badge" data-i18n="badge2">No setup work for you</span>
-    <span class="trust-badge" data-i18n="badge3">Ready in a few days</span>
-  </div>
-  <a href="https://wa.me/351939005194" target="_blank" rel="noopener" class="btn-pricing" data-i18n="price_cta">Get in touch</a>
-</section>
-
-<!-- ── GET IN TOUCH ── -->
-<section id="contact">
-  <h2 class="contact-heading" data-i18n="contact_heading">Ready to get started?</h2>
-  <p class="contact-sub" data-i18n="contact_sub">Send us a WhatsApp with your property name and location. We will take it from there.</p>
-  <a href="https://wa.me/351939005194" target="_blank" rel="noopener" class="btn-wa">
-    <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    <span data-i18n="wa_btn">WhatsApp us</span>
-  </a>
-  <p class="contact-reply" data-i18n="contact_reply">We reply within a few hours.</p>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-left"><span data-i18n="footer_brand">GuestPage Algarve</span><a class="footer-mail" href="mailto:contact@guestpagealgarve.com">contact@guestpagealgarve.com</a></div>
-  <div class="footer-center" data-i18n="footer_copy">© 2026 All rights reserved</div>
-  <div class="footer-right">
-    <button class="footer-lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-    <span class="footer-lang-divider">|</span>
-    <button class="footer-lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
+    <div class="foot-col">
+      <span>© 2026 GuestPage Algarve</span>
+      <div class="lang">
+        <button type="button" data-lang="en" onclick="setLang('en')">EN</button><span>/</span><button type="button" data-lang="pt" onclick="setLang('pt')">PT</button>
+      </div>
+    </div>
   </div>
 </footer>
 
 <script>
-  const translations = {
+  var translations = {
     en: {
-      nav_cta: 'Get in touch',
-      hero_headline: 'Give your guests everything they need, before they ask.',
-      hero_sub: 'A digital companion for your guests. Built and branded for you. Ready in a few days.',
-      hero_benefit: 'Better guest experiences, better reviews, more bookings.',
-      hero_cta1: 'See a demo page',
-      hero_cta2: 'Get in touch',
-      hero_proof: 'Used by property managers across the Algarve.',
-      how_label: 'HOW IT WORKS',
-      how_heading: 'Three steps to your GuestPage',
-      step1_title: 'Send us your listing link',
-      step1_desc: 'Your Airbnb or Booking link is enough to start. We pre-fill the page and only ask for what is missing.',
-      step2_title: 'We build your GuestPage',
-      step2_desc: 'Branded to your property, tested on mobile, ready within a few days.',
-      step3_title: 'Share the link before arrival',
-      step3_desc: 'Send it by WhatsApp once the booking is confirmed. Guests get the way from the airport, the check-in steps and the Wi-Fi before they land.',
-      demo_label: 'SEE A DEMO PAGE',
-      demo_text: 'Casa de Lagos is a demo home. Open it on your phone to see how a GuestPage feels.',
-      demo_btn: 'Open demo page',
-      inc_label: "WHAT'S INCLUDED",
-      inc_heading: "Everything your guests need. Nothing they don't.",
-      inc_items: [
-        'Getting here from Faro or Lisbon: transfers, car hire, train and bus',
-        'Check-in steps, keys and parking, and the Wi-Fi password with tap to copy',
-        'A search bar that understands English, Portuguese, French, German and Spanish',
-        '65 ready answers about the Algarve, from sun cream and the linen to cockroaches and golf',
-        'Restaurants, beaches and things to do, with Maps links',
-        'House rules, appliances and a checkout checklist',
-        'Emergency numbers with tap to call, and a WhatsApp button to reach you',
-        'Guests can flag a mistake or leave a note with one tap, straight to you',
-        'You edit the text yourself, any time, from a Google Sheet on your phone'
-      ],
-      inc_sub: 'All content is managed by you via Google Sheets. No tech skills needed.',
-      price_label: 'PRICING',
-      price_heading: 'One price. No surprises.',
-      price_line: 'Introductory launch price. Per property. One-time fee. No monthly costs.',
-      badge1: 'No subscriptions',
-      badge2: 'No setup work for you',
-      badge3: 'Ready in a few days',
-      price_cta: 'Get in touch',
-      contact_heading: 'Ready to get started?',
-      contact_sub: 'Send us a WhatsApp with your property name and location. We will take it from there.',
-      wa_btn: 'WhatsApp us',
-      contact_reply: 'We reply within a few hours.',
-      price_terms: 'Text changes are free for as long as the page is live. Layout changes: unlimited in the first 30 days, then one a month. Subscription guidebook tools charge from around €100 per property per year.',
-      footer_brand: 'GuestPage Algarve',
-      footer_copy: '© 2026 All rights reserved'
+      nav_demo: 'Demo house',
+      nav_price: 'Price',
+      nav_cta: 'WhatsApp me',
+      hero_h1: 'One link with everything your guests ask you on WhatsApp.',
+      hero_lead: 'The Wi-Fi, the keysafe, the bins, the beach. I build it from your Airbnb listing, and you change the text yourself from a Google Sheet on your phone.',
+      cta: 'Send me your Airbnb link',
+      demo_link: 'Open the demo house',
+      hero_facts: '€49 once per property, IVA included · Ready in a few days · No app for guests to download',
+      screens_h2: 'What your guest sees, from the airport to the keysafe.',
+      screens_p: 'Real screens from Casa de Lagos, the demo house. Your page has your house, your keys and your photos.',
+      s1_h: 'Getting here',
+      s1_p: 'From Faro Airport, 90 km on the A22. The last train to Lagos, the transfers, the car hire.',
+      s2_h: 'A card for every key',
+      s2_p: 'Which door it opens, how to tell it apart, which way it turns. Nobody calls you from the doorstep.',
+      s3_h: 'Something not working?',
+      s3_p: 'What to try first. If that fails, a WhatsApp to you that already says the house, the problem and what they tried.',
+      s4_h: 'Checkout, ticked off',
+      s4_p: 'Shutters, air conditioning, Netflix logged out, keys back in the keysafe.',
+      made_h2: 'Made in Lagos, by me.',
+      made_p: "I'm Mauro. I look after holiday homes here, so I know the questions guests send at eleven at night. I build every GuestPage myself and test it on my phone before you get the link.",
+      price_label: 'Introductory price, per property, once',
+      price_amount: '€49',
+      price_tax: 'IVA included',
+      terms_h2: "No subscription. Edit it for as long as it's live.",
+      t1_dt: 'Text changes',
+      t1_dd: 'Free, any time, from the Google Sheet.',
+      t2_dt: 'Layout changes',
+      t2_dd: 'Unlimited for 30 days, then one a month.',
+      t3_dt: 'Guidebook apps',
+      t3_dd: 'Charge from around €100 per property, every year.',
+      alt_home: 'The Casa de Lagos demo guide on a phone: the house, a search bar, and the Wi-Fi name and password with a Copy button',
+      alt_arrive: 'Arrive: the address, the distance from Faro Airport and from Lisbon',
+      alt_keys: 'House: a card for each key, saying which door it opens and which way it turns',
+      alt_fix: 'Contacts: Something not working? Fixes for the Wi-Fi, the keysafe, being locked out, the safe and more',
+      alt_checkout: 'Checkout: checkout at 11h00 and a checklist to tick off'
     },
     pt: {
-      nav_cta: 'Entrar em contacto',
-      hero_headline: 'Dê aos seus hóspedes tudo o que precisam, antes de perguntarem.',
-      hero_sub: 'Um companheiro digital para os seus hóspedes. Criado e personalizado para si. Pronto em poucos dias.',
-      hero_benefit: 'Melhores experiências para os hóspedes, melhores avaliações, mais reservas.',
-      hero_cta1: 'Ver página de demonstração',
-      hero_cta2: 'Entrar em contacto',
-      hero_proof: 'Utilizado por gestores de propriedades no Algarve.',
-      how_label: 'COMO FUNCIONA',
-      how_heading: 'Três passos para o seu GuestPage',
-      step1_title: 'Envie-nos o link do anúncio',
-      step1_desc: 'O link do Airbnb ou do Booking chega para começar. Nós pré-preenchemos a página e só pedimos o que falta.',
-      step2_title: 'Criamos o seu GuestPage',
-      step2_desc: 'Personalizado para a sua propriedade, testado em telemóvel, pronto em poucos dias.',
-      step3_title: 'Partilhe o link antes da chegada',
-      step3_desc: 'Envie pelo WhatsApp assim que a reserva estiver confirmada. Os hóspedes recebem o caminho desde o aeroporto, os passos do check-in e o Wi-Fi antes de aterrar.',
-      demo_label: 'VER PÁGINA DE DEMONSTRAÇÃO',
-      demo_text: 'Casa de Lagos é uma casa de demonstração. Abra no telemóvel para ver como funciona um GuestPage.',
-      demo_btn: 'Abrir página de demonstração',
-      inc_label: 'O QUE ESTÁ INCLUÍDO',
-      inc_heading: 'Tudo o que os seus hóspedes precisam. Nada mais.',
-      inc_items: [
-        'Como chegar desde Faro ou Lisboa: transfers, aluguer de carro, comboio e autocarro',
-        'Passos do check-in, chaves e estacionamento, e a palavra-passe do Wi-Fi com um toque para copiar',
-        'Uma pesquisa que entende português, inglês, francês, alemão e espanhol',
-        '65 respostas prontas sobre o Algarve, do protetor solar e da roupa de cama às baratas e ao golfe',
-        'Restaurantes, praias e o que fazer, com links para o Maps',
-        'Regras da casa, eletrodomésticos e checklist de check-out',
-        'Números de emergência com chamada direta e botão de WhatsApp para falar consigo',
-        'Os hóspedes assinalam um erro ou deixam uma nota com um toque, diretamente para si',
-        'Edita o texto quando quiser, a partir de uma Google Sheet no telemóvel'
-      ],
-      inc_sub: 'Todo o conteúdo é gerido por si via Google Sheets. Sem necessidade de conhecimentos técnicos.',
-      price_label: 'PREÇO',
-      price_heading: 'Um preço. Sem surpresas.',
-      price_line: 'Preço de lançamento. Por propriedade. Pagamento único. Sem custos mensais.',
-      badge1: 'Sem subscrições',
-      badge2: 'Sem trabalho de configuração',
-      badge3: 'Pronto em poucos dias',
-      price_cta: 'Entrar em contacto',
-      contact_heading: 'Pronto para começar?',
-      contact_sub: 'Envie-nos uma mensagem WhatsApp com o nome e localização da sua propriedade. Nós tratamos do resto.',
-      wa_btn: 'Enviar WhatsApp',
-      contact_reply: 'Respondemos em poucas horas.',
-      price_terms: 'Alterações de texto são gratuitas enquanto a página estiver ativa. Alterações de estrutura: sem limite nos primeiros 30 dias, depois uma por mês. As ferramentas por subscrição custam a partir de cerca de 100 € por propriedade por ano.',
-      footer_brand: 'GuestPage Algarve',
-      footer_copy: '© 2026 Todos os direitos reservados'
+      nav_demo: 'Casa de demonstração',
+      nav_price: 'Preço',
+      nav_cta: 'WhatsApp',
+      hero_h1: 'Um link com tudo o que os seus hóspedes lhe perguntam no WhatsApp.',
+      hero_lead: 'O Wi-Fi, a caixa das chaves, o lixo, a praia. Eu crio a página a partir do seu anúncio no Airbnb, e é você que altera o texto, numa Google Sheet no seu telemóvel.',
+      cta: 'Envie-me o link do Airbnb',
+      demo_link: 'Abrir a casa de demonstração',
+      hero_facts: '49 € uma vez por propriedade, IVA incluído · Pronto em poucos dias · Os hóspedes não instalam nada',
+      screens_h2: 'O que o hóspede vê, do aeroporto à caixa das chaves.',
+      screens_p: 'Ecrãs reais da Casa de Lagos, a casa de demonstração. A sua página tem a sua casa, as suas chaves e as suas fotos.',
+      s1_h: 'Como chegar',
+      s1_p: 'Do Aeroporto de Faro, 90 km pela A22. O último comboio para Lagos, os transfers, o aluguer de carro.',
+      s2_h: 'Um cartão para cada chave',
+      s2_p: 'Que porta abre, como a distinguir, para que lado roda. Ninguém lhe telefona da porta.',
+      s3_h: 'Algo não funciona?',
+      s3_p: 'O que experimentar primeiro. Se não resultar, uma mensagem de WhatsApp para si que já diz a casa, o problema e o que tentaram.',
+      s4_h: 'Check-out sem esquecimentos',
+      s4_p: 'Estores, ar condicionado, sair da Netflix, as chaves de volta na caixa.',
+      made_h2: 'Feito em Lagos, por mim.',
+      made_p: 'Chamo-me Mauro. Trato de casas de férias aqui, por isso conheço as perguntas que os hóspedes mandam às onze da noite. Faço cada GuestPage eu mesmo e testo-a no meu telemóvel antes de lhe enviar o link.',
+      price_label: 'Preço de lançamento, por propriedade, uma só vez',
+      price_amount: '49 €',
+      price_tax: 'IVA incluído',
+      terms_h2: 'Sem subscrição. Edite enquanto a página estiver ativa.',
+      t1_dt: 'Alterações de texto',
+      t1_dd: 'Grátis, sempre que quiser, na Google Sheet.',
+      t2_dt: 'Alterações de estrutura',
+      t2_dd: 'Sem limite nos primeiros 30 dias, depois uma por mês.',
+      t3_dt: 'Apps de guias',
+      t3_dd: 'Cobram a partir de cerca de 100 € por propriedade, todos os anos.',
+      alt_home: 'O guia de demonstração da Casa de Lagos num telemóvel: a casa, a pesquisa, e o nome e a palavra-passe do Wi-Fi com um botão para copiar',
+      alt_arrive: 'Chegada: a morada e a distância do Aeroporto de Faro e de Lisboa',
+      alt_keys: 'Casa: um cartão para cada chave, com a porta que abre e para que lado roda',
+      alt_fix: 'Contactos: Algo não funciona? Soluções para o Wi-Fi, a caixa das chaves, ficar trancado lá fora, o cofre e mais',
+      alt_checkout: 'Check-out: saída às 11h00 e uma lista para ir marcando'
     }
   };
 
-  let currentLang = 'en';
-
-  function buildChecklist(lang) {
-    const list = document.getElementById('checklist');
-    list.innerHTML = '';
-    const items = translations[lang].inc_items;
-    items.forEach(function(item) {
-      const li = document.createElement('li');
-      li.className = 'check-item';
-      li.innerHTML =
-        '<svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
-        '<span>' + item + '</span>';
-      list.appendChild(li);
-    });
-  }
-
   function setLang(lang, remember) {
-    currentLang = lang;
+    var t = translations[lang];
+    if (!t) return;
     if (remember !== false) { try { localStorage.setItem('gp-lang', lang); } catch (e) {} }
-    const t = translations[lang];
-
-    document.querySelectorAll('[data-i18n]').forEach(function(el) {
-      const key = el.getAttribute('data-i18n');
-      if (t[key] !== undefined) {
-        el.textContent = t[key];
-      }
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
     });
-
-    buildChecklist(lang);
-
-    document.querySelectorAll('.lang-btn[data-lang]').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-alt');
+      if (t[key] !== undefined) el.setAttribute('alt', t[key]);
     });
-    document.querySelectorAll('.footer-lang-btn[data-lang]').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    document.querySelectorAll('.lang button[data-lang]').forEach(function (btn) {
+      var on = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
   }
 
   // First visit: follow the browser language. After a tap on EN or PT, keep that choice.
